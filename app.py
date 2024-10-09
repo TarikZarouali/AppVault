@@ -2,7 +2,7 @@
 from raad_het_nummer import raad_het_nummer
 from dagboek import dagboek_menu
 
-# Function to display the app logo
+# Function to display the app logo ASCII art
 def toon_logo():
     logo = r"""
       _____                  ____   ____            .__   __   
