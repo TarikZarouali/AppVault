@@ -3,7 +3,7 @@ def lees_dagboek_bestand():
     try:
         with open("dagboek.txt", "r") as f:
             entries = [regel.strip().split(";") for regel in f.readlines()]
-            return {entry[0]: entry[1] for entry in entries}  # Return dictionary {name: code}
+            return {entry[0]: entry[1] for entry in entries}
     except FileNotFoundError:
         return {}
 
@@ -12,7 +12,7 @@ def lees_dagboek_inhoud():
     try:
         with open("inhoud_dagboek.txt", "r") as f:
             inhoud = [regel.strip().split(";") for regel in f.readlines()]
-            return {entry[0]: entry[1:] for entry in inhoud if entry[1:]}  # Alleen dagboek met inhoud
+            return {entry[0]: entry[1:] for entry in inhoud if entry[1:]}  
     except FileNotFoundError:
         return {}
 
@@ -20,7 +20,7 @@ def lees_dagboek_inhoud():
 def schrijf_dagboek_inhoud(inhoud):
     with open("inhoud_dagboek.txt", "w") as f:
         for naam, items in inhoud.items():
-            if items:  # Schrijf alleen niet-lege inhoud naar het bestand
+            if items: 
                 f.write(f"{naam};{';'.join(items)}\n")
 
 # Functie om het dagboekbestand bij te werken
@@ -84,11 +84,11 @@ def verwijder_dagboek_item():
 
             item_nummer = int(input("Voer het nummer van het item in dat je wilt verwijderen: "))
             if 1 <= item_nummer <= len(dagboek_inhoud[naam]):
-                verwijderd_item = dagboek_inhoud[naam][item_nummer - 1]  # Item selecteren
+                verwijderd_item = dagboek_inhoud[naam][item_nummer - 1] 
                 bevestiging = input(f"Ben je zeker dat je het item '{verwijderd_item}' wilt verwijderen? (y/n): ")
                 if bevestiging.lower() == 'y':
-                    dagboek_inhoud[naam].pop(item_nummer - 1)  # Verwijder het item
-                    schrijf_dagboek_inhoud(dagboek_inhoud)  # Schrijf de bijgewerkte inhoud terug
+                    dagboek_inhoud[naam].pop(item_nummer - 1) 
+                    schrijf_dagboek_inhoud(dagboek_inhoud)  
                     print(f"Item '{verwijderd_item}' is verwijderd.")
                 else:
                     print("Verwijdering geannuleerd.")
@@ -101,6 +101,7 @@ def verwijder_dagboek_item():
 
 # Functie om een dagboek te verwijderen
 def verwijder_dagboek():
+ 
     dagboek_entries = lees_dagboek_bestand()
 
     naam = input("Voer de naam van je dagboek in dat je wilt verwijderen: ")
@@ -109,12 +110,12 @@ def verwijder_dagboek():
         if dagboek_entries[naam] == code:
             bevestiging = input(f"Ben je zeker dat je het dagboek '{naam}' wilt verwijderen? (y/n): ")
             if bevestiging.lower() == 'y':
-                del dagboek_entries[naam]  # Verwijder het dagboek uit de dictionary
-                schrijf_dagboek_bestand(dagboek_entries)  # Schrijf de bijgewerkte entries terug
+                del dagboek_entries[naam] 
+                schrijf_dagboek_bestand(dagboek_entries) 
                 dagboek_inhoud = lees_dagboek_inhoud()
                 if naam in dagboek_inhoud:
-                    del dagboek_inhoud[naam]  # Verwijder de inhoud van het dagboek
-                    schrijf_dagboek_inhoud(dagboek_inhoud)  # Schrijf de bijgewerkte inhoud terug
+                    del dagboek_inhoud[naam] 
+                    schrijf_dagboek_inhoud(dagboek_inhoud) 
                 print(f"Dagboek '{naam}' is verwijderd.")
             else:
                 print("Verwijdering geannuleerd.")
@@ -124,7 +125,11 @@ def verwijder_dagboek():
         print("Geen dagboek gevonden met deze naam.")
 
 # Functie om een dagboek te openen
+"""
+dit is een comment
+"""
 def open_dagboek():
+
     dagboek_entries = lees_dagboek_bestand()
     dagboek_inhoud = lees_dagboek_inhoud()
 
@@ -158,7 +163,7 @@ def dagboek_menu():
         keuze = input("Voer je keuze in (1-6): ")
 
         if keuze == "1":
-            voeg_dagboek_toe()  # Voeg deze regel toe om de functie aan te roepen
+            voeg_dagboek_toe()
         elif keuze == "2":
             voeg_dagboek_item_toe()
         elif keuze == "3":
